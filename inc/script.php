@@ -6,6 +6,9 @@ $prefix_willhaben = 'https://willhaben.at/';
 
 //TODO option: &page=2 , &ESTATE_SIZE/LIVING_AREA_FROM=80 & &PRICE_TO=500
 
+if(!isset($_GET["art"])){
+    $_GET["art"]= "miete";
+}
 
 switch($_GET["art"]){
     case "miete":
@@ -17,7 +20,6 @@ switch($_GET["art"]){
         break;
 }
 
-
 //$default = 'https://www.willhaben.at/iad/immobilien/haus-kaufen/steiermark/graz?rows=200&sort=3';
 
 $js = "var markers = L.markerClusterGroup();\n";
@@ -26,6 +28,13 @@ $pattern = "/{\"props\":.*}/i";
 
 $cnt=0;
 for($page=1;$page <5;$page++){
+   /* $curl_handle=curl_init();
+    curl_setopt($curl_handle, CURLOPT_URL, $default."&page=".$page);
+    curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Opera');
+    $data = curl_exec($curl_handle);
+    curl_close($curl_handle);*/
     
     $data = file_get_contents($default."&page=".$page);
     preg_match($pattern, $data, $matches);
