@@ -7,17 +7,24 @@ $prefix_willhaben = 'https://willhaben.at/';
 //TODO option: &page=2 , &ESTATE_SIZE/LIVING_AREA_FROM=80 & &PRICE_TO=500
 
 if(!isset($_GET["art"])){
-    $_GET["art"]= "miete";
+    $_GET["art"]= "0";
 }
 
 switch($_GET["art"]){
-    case "miete":
+    case "0":
         $default = 'https://www.willhaben.at/iad/immobilien/mietwohnungen/steiermark/graz?rows=200&PRICE_TO=750';        
         break;
     default:
-    case "kaufen":
-        $default = 'https://www.willhaben.at/iad/immobilien/eigentumswohnung/steiermark/graz?rows=200&PRICE_TO=400000';        
+    case "1":
+        $default = 'https://www.willhaben.at/iad/immobilien/eigentumswohnung/steiermark/graz?rows=200';
         break;
+    case "2":
+        $default = 'https://www.willhaben.at/iad/immobilien/haus-kaufen/steiermark/graz?rows=200';
+        break;
+    case "3":
+        $default = 'https://www.willhaben.at/iad/immobilien/eigentumswohnung/steiermark/graz-umgebung?rows=200';
+        break;
+        
 }
 
 //$default = 'https://www.willhaben.at/iad/immobilien/haus-kaufen/steiermark/graz?rows=200&sort=3';
@@ -27,7 +34,7 @@ $js = "var markers = L.markerClusterGroup();\n";
 $pattern = "/{\"props\":.*}/i";
 
 $cnt=0;
-for($page=1;$page <5;$page++){
+for($page=1;$page <6;$page++){
    /* $curl_handle=curl_init();
     curl_setopt($curl_handle, CURLOPT_URL, $default."&page=".$page);
     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -44,7 +51,7 @@ for($page=1;$page <5;$page++){
         $info = array('ADDRESS'=>'NA');
         foreach ($item->attributes->attribute as $entry){
             if (in_array($entry->name , array('MMO','PRICE','ESTATE_SIZE','ADDRESS','LOCATION','COORDINATES','HEADING','POSTCODE','ESTATE_SIZE/LIVING_AREA','SEO_URL'))){
-                $info[$entry->name] = $entry->values[0];
+                $info[$entry->name] = addslashes($entry->values[0]);
             }
             
         }
