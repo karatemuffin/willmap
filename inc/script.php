@@ -17,10 +17,10 @@ if(!isset($_GET["minsize"])){
 }
 
 switch($_GET["art"]){
-    case "0":
-        $default = 'https://www.willhaben.at/iad/immobilien/mietwohnungen/steiermark/graz?rows=200&PRICE_TO=750';        
-        break;
     default:
+    case "0":
+        $default = 'https://www.willhaben.at/iad/immobilien/mietwohnungen/steiermark/graz?rows=200';        
+        break;
     case "1":
         $default = 'https://www.willhaben.at/iad/immobilien/eigentumswohnung/steiermark/graz?rows=200';
         break;
@@ -28,8 +28,15 @@ switch($_GET["art"]){
         $default = 'https://www.willhaben.at/iad/immobilien/haus-kaufen/steiermark/graz?rows=200';
         break;
     case "3":
+        $default = 'https://www.willhaben.at/iad/immobilien/mietwohnungen/steiermark/graz-umgebung?rows=200';
+        break;
+    case "4":
         $default = 'https://www.willhaben.at/iad/immobilien/eigentumswohnung/steiermark/graz-umgebung?rows=200';
         break;
+    case "5":
+        $default = 'https://www.willhaben.at/iad/immobilien/haus-kaufen/steiermark/graz-umgebung?rows=200';
+        break;
+        
         
 }
 
