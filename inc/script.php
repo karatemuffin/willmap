@@ -9,6 +9,12 @@ $prefix_willhaben = 'https://willhaben.at/';
 if(!isset($_GET["art"])){
     $_GET["art"]= "0";
 }
+if(!isset($_GET["pages"])){
+    $_GET["pages"]= "1";
+}
+if(!isset($_GET["minsize"])){
+    $_GET["minsize"]= "50";
+}
 
 switch($_GET["art"]){
     case "0":
@@ -34,7 +40,7 @@ $js = "var markers = L.markerClusterGroup();\n";
 $pattern = "/{\"props\":.*}/i";
 
 $cnt=0;
-for($page=1;$page <6;$page++){
+for($page=1;$page < $_GET["pages"] + 1 ; $page++){
    /* $curl_handle=curl_init();
     curl_setopt($curl_handle, CURLOPT_URL, $default."&page=".$page);
     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -56,7 +62,7 @@ for($page=1;$page <6;$page++){
             
         }
         try{
-            if(strlen($info['COORDINATES']) > 3){
+            if(strlen($info['COORDINATES']) > 3 && $_GET["minsize"] <= $info['ESTATE_SIZE']){
             $js .= "var tmp = L.marker([".$info['COORDINATES']."]).addTo(map);\n";
             $js .= "tmp.bindPopup('<b>".$info['HEADING']."</b><br>"
              .$info['POSTCODE']." ".$info['LOCATION'].", ".$info['ADDRESS']."<br>"
