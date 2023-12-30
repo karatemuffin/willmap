@@ -7,7 +7,7 @@ function addslashes (str) {
     .replace(/\u0000/g, '\\0')
 }
 
-const map = L.map('myMap').setView([47.0313,15.4105], 11);
+const map = L.map('myMap');
 const prefix_mmo = 'https://cache.willhaben.at/mmo/';
 const prefix_willhaben = 'https://willhaben.at/';
 
@@ -19,12 +19,15 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 async function addMarker(dd){
-
-  var markers = L.markerClusterGroup();
-  map.eachLayer((layer) => {
-     if(layer['_latlng']!=undefined)
-         layer.remove();
+  map.eachLayer(function(layer) {
+      if (layer instanceof L.MarkerClusterGroup)
+      {
+          layer.clearLayers();
+          map.removeLayer(layer);
+      }
   });
+  
+  var markers = L.markerClusterGroup();
   var min = [1000,1000];
   var max = [0,0];
   
