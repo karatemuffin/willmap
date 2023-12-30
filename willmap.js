@@ -1,6 +1,3 @@
-
-
-
 var callfun = function(){
 var leaf_ex = document.createElement("script");
 leaf_ex.innerHTML=`
@@ -22,23 +19,47 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 async function addMarker(dd){
+
   var markers = L.markerClusterGroup();
   map.eachLayer((layer) => {
      if(layer['_latlng']!=undefined)
          layer.remove();
   });
+  var min = [1000,1000];
+  var max = [0,0];
+  
   dd.advertSummaryList.advertSummary.forEach((item) => {
     var array = [];
-    array['ADDRESS'] = 'NA';
+    
+    const need = ['MMO','PRICE','ESTATE_SIZE','ADDRESS','LOCATION','COORDINATES','HEADING','POSTCODE','ESTATE_SIZE/LIVING_AREA','SEO_URL'];
+    need.forEach( (item) => {
+      array[item] = 'NA';
+    });
+    
     item.attributes.attribute.forEach((entry) => {
       array[entry.name] = addslashes(entry.values[0]);
     });
+    
     const coords = array['COORDINATES'].split(",").map(Number);
+
+    if(isNaN(coords[0])){
+      console.log("skipping: " + array['HEADING']);
+      return;
+    }
+
+    max[0] = Math.max(max[0],coords[0]);
+    max[1] = Math.max(max[1],coords[1]);
+    min[0] = Math.min(min[0],coords[0]);
+    min[1] = Math.min(min[1],coords[1]);
+    
     var tmp = L.marker(coords).addTo(map);
     tmp.bindPopup('<b>' + array['HEADING']  + '</b><br>' + array['POSTCODE'] +' ' + array['LOCATION'] +', ' +array['ADDRESS'] +'<br>' + array['ESTATE_SIZE'] + 'm²<br>' + array['PRICE'] + '€<br><a href=\"' + prefix_willhaben +   array['SEO_URL'] + '\" target=\"_blank\">Link</a><br> <img src=\"' + prefix_mmo + array['MMO'] +'\" height=\"200px\">');
-    markers.addLayer(tmp);        
+    markers.addLayer(tmp);
+
   });
   map.addLayer(markers);
+
+  map.fitBounds([min,max]);
 }
 
 var nextData = JSON.parse(document.getElementById('__NEXT_DATA__').textContent);
@@ -64,16 +85,11 @@ window.fetch = new Proxy(window.fetch, {
 document.body.appendChild(leaf_ex);
 }
 
-
-
-
 document.body.style.border = "5px solid red";
 var leaf_css = document.createElement("link");
 leaf_css.rel = "stylesheet";
 leaf_css.type = "text/css";
 leaf_css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-//leaf_css.integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=";
-//leaf_css.crossorigin="";
 document.head.appendChild(leaf_css);
 
 var leaf_css1 = document.createElement("link");
@@ -96,14 +112,11 @@ var call1 = function(){
   document.head.appendChild(leaf_js1);
 }
 
-
 var leaf_js = document.createElement("script");
 leaf_js.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
 leaf_js.type = "text/javascript";
 leaf_js.onload = call1;
 document.head.appendChild(leaf_js);
-
-
 
 var leaf_div = document.createElement("div");
 leaf_div.id="myMap";
@@ -111,5 +124,3 @@ leaf_div.style="width: auto; height: 600px; border: 5px solid green;";
 let targetDiv = document.getElementById("skip-to-resultlist")
 let parentDiv = targetDiv.parentNode;
 parentDiv.insertBefore(leaf_div, targetDiv);
-
-console.log("foo");
