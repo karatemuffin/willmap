@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Borderify",
   "version": "1.0",
 
@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.willhaben.at/*"],
-      "js": ["willmap.js"]
+      "js": ["content_scripts/willmap.js"]
     }
   ]
 }
