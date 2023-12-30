@@ -107,7 +107,7 @@ document.head.appendChild(leaf_js);
 
 var leaf_div = document.createElement("div");
 leaf_div.id="myMap";
-leaf_div.style="width: 600px; height: 400px; border: 5px solid green;";
+leaf_div.style="width: auto; height: 600px; border: 5px solid green;";
 let targetDiv = document.getElementById("skip-to-resultlist")
 let parentDiv = targetDiv.parentNode;
 parentDiv.insertBefore(leaf_div, targetDiv);
