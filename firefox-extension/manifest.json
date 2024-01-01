@@ -2,17 +2,34 @@
   "manifest_version": 3,
   "name": "Borderify",
   "version": "1.0",
-
   "description": "Adds a red border to all webpages matching mozilla.org.",
-
   "icons": {
     "48": "icons/border-48.png"
   },
-
+  "permissions": [
+    "activeTab"
+  ],
   "content_scripts": [
     {
       "matches": ["*://*.willhaben.at/*"],
       "js": ["content_scripts/willmap.js"]
     }
-  ]
+  ],
+    "web_accessible_resources": [{
+      "resources": [
+      "js/leaflet.markercluster.js",
+      "js/leaflet.markercluster.js.map",
+      "js/MarkerCluster.css",
+      "js/MarkerCluster.Default.css",
+      "js/leaflet.js",
+      "js/leaflet.js.map",
+      "js/leaflet.css",
+      "js/images/layers-2x.png",
+      "js/images/layers.png",
+      "js/images/marker-icon-2x.png",
+      "js/images/marker-icon.png",
+      "js/images/marker-shadow.png"
+      ],
+     "matches": ["<all_urls>"]
+  }]
 }

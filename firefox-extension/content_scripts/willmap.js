@@ -92,32 +92,33 @@ document.body.style.border = "5px solid red";
 var leaf_css = document.createElement("link");
 leaf_css.rel = "stylesheet";
 leaf_css.type = "text/css";
-leaf_css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+leaf_css.href = browser.runtime.getURL("js/leaflet.css");
 document.head.appendChild(leaf_css);
 
 var leaf_css1 = document.createElement("link");
 leaf_css1.rel = "stylesheet";
 leaf_css1.type = "text/css";
-leaf_css1.href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css";
+leaf_css1.href=browser.runtime.getURL("js/MarkerCluster.css");
 document.head.appendChild(leaf_css1);
 
 var leaf_css2 = document.createElement("link");
 leaf_css2.rel = "stylesheet";
 leaf_css2.type = "text/css";
-leaf_css2.href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css";
+leaf_css2.href=browser.runtime.getURL("js/MarkerCluster.Default.css");
 document.head.appendChild(leaf_css2);
 
 var call1 = function(){
   var leaf_js1 = document.createElement("script");
-  leaf_js1.src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js";
+  leaf_js1.src=browser.runtime.getURL("js/leaflet.markercluster.js");
   leaf_js1.type = "text/javascript";
   leaf_js1.onload = callfun;
   document.head.appendChild(leaf_js1);
 }
 
 var leaf_js = document.createElement("script");
-leaf_js.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+leaf_js.src=browser.runtime.getURL("js/leaflet.js");
 leaf_js.type = "text/javascript";
+leaf_js.integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=";
 leaf_js.onload = call1;
 document.head.appendChild(leaf_js);
 
