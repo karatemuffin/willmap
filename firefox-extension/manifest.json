@@ -17,6 +17,7 @@
   ],
     "web_accessible_resources": [{
       "resources": [
+      "js/content.js",
       "js/leaflet.markercluster.js",
       "js/leaflet.markercluster.js.map",
       "js/MarkerCluster.css",
