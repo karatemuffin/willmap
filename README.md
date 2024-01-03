@@ -5,7 +5,7 @@ Basierend auf den übergebenen willhaben.at Suchstring wird eine Karte mit den E
   `apt-get install  php-cli`
   `php -S localhost:8080`
  
-## firefox-extension
+## browser-extension
 Die Webextension läuft auf Firefox und Chrome. Sie fügt oberhalb der Immobiliensuchergebnisse von willhaben.at eine Karte ein.
 
 ### SHA256 für js/content.js
