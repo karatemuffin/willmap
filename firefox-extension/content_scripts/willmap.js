@@ -1,6 +1,7 @@
 var callfun = function(){
 var leaf_ex = document.createElement("script");
 leaf_ex.innerHTML=`
+
 function addslashes (str) {
   return (str + '')
     .replace(/[\\"']/g, '\\$&')
@@ -16,18 +17,23 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-
+var markers;
 
 async function addMarker(dd){
+  //clear MarkerClusterGroup
+  if(markers){
+    markers.clearLayers();
+  }
+  //then remove all Marker
   map.eachLayer(function(layer) {
-      if (layer instanceof L.MarkerClusterGroup)
-      {
-          layer.clearLayers();
-          map.removeLayer(layer);
-      }
+    if (layer instanceof L.Marker)
+    {
+      map.removeLayer(layer);
+    }
   });
+        
+  markers = L.markerClusterGroup();
   
-  var markers = L.markerClusterGroup();
   var min = [1000,1000];
   var max = [0,0];
   
@@ -61,8 +67,7 @@ async function addMarker(dd){
 
   });
   map.addLayer(markers);
-
-  map.fitBounds([min,max]);
+  map.fitBounds([min,max], {padding: [25,25]});
 }
 
 var nextData = JSON.parse(document.getElementById('__NEXT_DATA__').textContent);
