@@ -48,13 +48,6 @@ $pattern = "/{\"props\":.*}/i";
 
 $cnt=0;
 for($page=1;$page < $_GET["pages"] + 1 ; $page++){
-   /* $curl_handle=curl_init();
-    curl_setopt($curl_handle, CURLOPT_URL, $default."&page=".$page);
-    curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Opera');
-    $data = curl_exec($curl_handle);
-    curl_close($curl_handle);*/
     
     $data = file_get_contents($default."&page=".$page);
     preg_match($pattern, $data, $matches);
@@ -90,6 +83,5 @@ for($page=1;$page < $_GET["pages"] + 1 ; $page++){
 }
 $js .= "map.addLayer(markers);\n";
 echo $js;
-//print_r($cnt);
 ?>
 </script>
