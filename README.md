@@ -41,3 +41,5 @@ Das Script besitzt lediglich 3 Parameter
  
 ![php-standalone-screenshot.png](php-standalone-screenshot.png)
 
+## Lizenzrechtliches
+ - [Logo](https://github.com/mdn/webextensions-examples/blob/main/borderify/icons/border-48.png): MPL 2.0 
