@@ -6,7 +6,7 @@ function addslashes (str) {
 
 const map = L.map('myMap');
 const prefix_mmo = 'https://cache.willhaben.at/mmo/';
-const prefix_willhaben = 'https://willhaben.at/';
+const prefix_willhaben = 'https://willhaben.at/iad/';
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,

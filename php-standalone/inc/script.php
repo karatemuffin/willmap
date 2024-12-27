@@ -2,7 +2,7 @@
 <?php 
 
 $prefix_mmo = 'https://cache.willhaben.at/mmo/';
-$prefix_willhaben = 'https://willhaben.at/';
+$prefix_willhaben = 'https://willhaben.at/iad/';
 
 //TODO option: &page=2 , &ESTATE_SIZE/LIVING_AREA_FROM=80 & &PRICE_TO=500
 
